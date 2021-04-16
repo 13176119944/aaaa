@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vuejs/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="../vuejs/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="meunlistdiv">
+    <table border="1" align="center" bgcolor="#ffb6c1" width="60%">
+        <tr>
+            <th>编号</th>
+            <th>父id</th>
+            <th>节点名称</th>
+            <th>url</th>
+            <th>target</th>
+            <th>图标样式</th>
+            <th>是否为按钮</th>
+            <th>操作
+                <button @click="toAddMeun()">添加</button>
+            </th>
+        </tr>
+        <tr v-for="m in meunlist">
+            <td>{{m.id}}</td>
+            <td>{{m.pid}}</td>
+            <td>{{m.mname}}</td>
+            <td>{{m.url}}</td>
+            <td>{{m.target}}</td>
+            <td>{{m.icon}}</td>
+            <td>
+                {{m.isbutton==1?'是':'否'}}
+            </td>
+            <td>
+                <button @click="getMeunListByPid(m.id)">查询下级</button>
+                <button @click="deleteMeunByPid(m.id)">删除</button>
+            </td>
+        </tr>
+    </table>
+    <div  id="meunupdatediv" style="display: none">
+        <table border="1" align="center" bgcolor="#ffb6c1" width="60%" >
+            <tr>
+                <td>父id</td>
+                <td>
+                    {{pid}}
+                </td>
+            </tr>
+            <tr>
+                <td>节点名称</td>
+                <td><input type="text" v-model="enetity.mname"></td>
+            </tr>
+            <tr>
+                <td>url</td>
+                <td><input type="text" v-model="enetity.url"></td>
+            </tr>
+            <tr>
+                <td>target</td>
+                <td><input type="text" v-model="enetity.target"></td>
+            </tr>
+            <tr>
+                <td>图标样式</td>
+                <td><input type="text" v-model="enetity.icon"></td>
+            </tr>
+            <tr>
+                <td>是否按钮</td>
+               <!-- <td>
+                    <select v-model="entity.isbutton">
+                        <option value="0">不是</option>
+                        <option value="1">是</option>
+                    </select>
+                </td>-->
+            </tr>
+            <tr>
+                <td colspan="17">
+                    <button @click="saveMeun()">保存</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../myjs/meun_list.js"></script>
+</html>

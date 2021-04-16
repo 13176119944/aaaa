@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vuejs/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="../vuejs/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="peptlistdiv">
+    <table border="1" align="center" bgcolor="#ffb6c1" width="60%">
+        <tr>
+            <td colspan="17">
+                名称：<input type="text" v-model="searchEntity.deptname">
+                <button @click="getDeptListConn()">检索</button>
+            </td>
+        </tr>
+        <tr>
+            <th>编号</th>
+            <th>科室名称</th>
+            <th colspan="17">操作</th>
+        </tr>
+        <tr v-for="d in deptlist">
+            <td>{{d.id}}</td>
+            <td>{{d.deptname}}</td>
+            <td><button>删除</button>
+                <button @click="toAddpost(d.id)">选择部门</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="17">
+                当前{{page.currentPage}}/{{page.pageCount}}页；
+                <button @click="paging(1)">首页</button>
+                <button @click="paging(page.previousPage)">上一页</button>
+                <button @click="paging(page.nextPage)">下一页</button>
+                <button @click="paging(page.pageCount)">尾页</button>
+            </td>
+        </tr>
+    </table>
+    <div id="addPostdiv" style="display: none">
+        <h1 align="center">当前给{{entity.deptname}}添加职位</h1>
+        <table border="1" bgcolor="#ffb6c1" align="center">
+            <td>职位</td>
+            <td>
+                <span v-for="p in plist">
+                <input type="checkbox" v-model="postids" :value="p.id">{{p.postname}}<br>
+                </span>
+            </td>
+            <td colspan="17">
+                <button @click="savePost()">保存</button>
+            </td>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../myjs/dept_list.js"></script>
+</html>
